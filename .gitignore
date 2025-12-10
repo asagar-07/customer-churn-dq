@@ -1,0 +1,68 @@
+##############################################
+# Python + Virtual Environment
+##############################################
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+.venv/
+venv/
+env/
+ENV/
+
+##############################################
+# Jupyter Notebook
+##############################################
+.ipynb_checkpoints/
+
+##############################################
+# VS Code
+##############################################
+.vscode/
+
+##############################################
+# OS files
+##############################################
+.DS_Store
+Thumbs.db
+
+##############################################
+# Data directories
+##############################################
+
+# Ignore all processed and interim data
+data/interim/
+data/processed/
+
+# Ignore all raw data EXCEPT the main Telco CSV
+data/raw/*
+!data/raw/telco-Customer-Churn.csv
+
+# Ignore large sample messy data (optional)
+data/sample/*
+
+##############################################
+# Model Artifacts
+##############################################
+models/
+*.pkl
+*.joblib
+*.h5
+
+##############################################
+# Logs and temp
+##############################################
+logs/
+*.log
+tmp/
+temp/
+.cache/
+
+##############################################
+# Test artifacts (optional)
+##############################################
+.pytest_cache/
+.coverage
+htmlcov/
