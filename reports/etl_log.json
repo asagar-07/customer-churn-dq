@@ -1,0 +1,576 @@
+{
+  "row_count_in": 8099,
+  "row_count_out": 8099,
+  "changes": {
+    "trim_whitespace": {
+      "gender": 226,
+      "Partner": 223,
+      "Dependents": 223,
+      "PhoneService": 231,
+      "MultipleLines": 223,
+      "InternetService": 221,
+      "OnlineSecurity": 215,
+      "OnlineBackup": 227,
+      "DeviceProtection": 224,
+      "TechSupport": 230,
+      "StreamingTV": 224,
+      "StreamingMovies": 221,
+      "Contract": 219,
+      "PaperlessBilling": 222,
+      "PaymentMethod": 228
+    },
+    "normalize_unknown_tokens": {
+      "gender": 270,
+      "SeniorCitizen": 262,
+      "Partner": 272,
+      "Dependents": 276,
+      "PhoneService": 265,
+      "MultipleLines": 273,
+      "InternetService": 274,
+      "OnlineSecurity": 281,
+      "OnlineBackup": 256,
+      "DeviceProtection": 294,
+      "TechSupport": 288,
+      "StreamingTV": 263,
+      "StreamingMovies": 286,
+      "Contract": 266,
+      "PaperlessBilling": 269,
+      "PaymentMethod": 266
+    },
+    "normalize_categorical_variants": {
+      "gender": 293,
+      "SeniorCitizen": 7730,
+      "Partner": 299,
+      "Dependents": 300,
+      "PhoneService": 296,
+      "MultipleLines": 295,
+      "InternetService": 195,
+      "OnlineSecurity": 297,
+      "OnlineBackup": 287,
+      "DeviceProtection": 299,
+      "TechSupport": 289,
+      "StreamingTV": 296,
+      "StreamingMovies": 301,
+      "Contract": 297,
+      "PaperlessBilling": 292,
+      "PaymentMethod": 294,
+      "Churn": 351
+    },
+    "infinite_to_nan": {
+      "tenure": 24,
+      "MonthlyCharges": 20,
+      "TotalCharges": 27
+    },
+    "numeric_negative_to_nan": {
+      "tenure": 55,
+      "MonthlyCharges": 73,
+      "TotalCharges": 64
+    },
+    "numeric_value_corrected": {
+      "tenure": 79,
+      "MonthlyCharges": 93,
+      "TotalCharges": 91
+    },
+    "numeric_format_normalized": {
+      "tenure": 7311,
+      "MonthlyCharges": 69,
+      "TotalCharges": 68
+    },
+    "coerce_numeric": {
+      "tenure": 79,
+      "MonthlyCharges": 93,
+      "TotalCharges": 91
+    },
+    "fix_logical_inconsistency_internet": {
+      "OnlineSecurity": 58,
+      "OnlineBackup": 56,
+      "DeviceProtection": 59,
+      "TechSupport": 54,
+      "StreamingTV": 61,
+      "StreamingMovies": 56
+    },
+    "invalid_category_values": {
+      "gender": 112
+    },
+    "flag_duplicates": {
+      "customerID": 2112
+    },
+    "impute_numeric_median": {
+      "tenure": 724,
+      "MonthlyCharges": 716,
+      "TotalCharges": 730
+    },
+    "impute_categorical_mode": {
+      "gender": 481,
+      "SeniorCitizen": 369,
+      "Partner": 369,
+      "Dependents": 369,
+      "PhoneService": 369,
+      "MultipleLines": 369,
+      "InternetService": 369,
+      "OnlineSecurity": 369,
+      "OnlineBackup": 369,
+      "DeviceProtection": 369,
+      "TechSupport": 369,
+      "StreamingTV": 369,
+      "StreamingMovies": 369,
+      "Contract": 369,
+      "PaperlessBilling": 369,
+      "PaymentMethod": 369
+    }
+  },
+  "examples": {
+    "normalize_unknown_tokens": {
+      "gender": [
+        "Not provided",
+        "na",
+        "Not Applicable",
+        "Unknown",
+        "UNKNOWN",
+        "NOT APPLICABLE"
+      ],
+      "SeniorCitizen": [
+        "Not provided",
+        "Unknown",
+        "UNKNOWN",
+        "NOT APPLICABLE",
+        "Not Applicable",
+        "na"
+      ],
+      "Partner": [
+        "NOT APPLICABLE",
+        "Not provided",
+        "Unknown",
+        "UNKNOWN",
+        "Not Applicable",
+        "na"
+      ],
+      "Dependents": [
+        "NOT APPLICABLE",
+        "na",
+        "Not provided",
+        "Unknown",
+        "Not Applicable",
+        "UNKNOWN"
+      ],
+      "PhoneService": [
+        "Not Applicable",
+        "na",
+        "UNKNOWN",
+        "Not provided",
+        "Unknown",
+        "NOT APPLICABLE"
+      ],
+      "MultipleLines": [
+        "Not Applicable",
+        "Not provided",
+        "NOT APPLICABLE",
+        "Unknown",
+        "na",
+        "UNKNOWN"
+      ],
+      "InternetService": [
+        "na",
+        "NOT APPLICABLE",
+        "Not provided",
+        "UNKNOWN",
+        "Unknown",
+        "Not Applicable"
+      ],
+      "OnlineSecurity": [
+        "Unknown",
+        "NOT APPLICABLE",
+        "Not Applicable",
+        "na",
+        "UNKNOWN",
+        "Not provided"
+      ],
+      "OnlineBackup": [
+        "Not provided",
+        "UNKNOWN",
+        "NOT APPLICABLE",
+        "na",
+        "Not Applicable",
+        "Unknown"
+      ],
+      "DeviceProtection": [
+        "na",
+        "Not provided",
+        "Unknown",
+        "NOT APPLICABLE",
+        "Not Applicable",
+        "UNKNOWN"
+      ],
+      "TechSupport": [
+        "NOT APPLICABLE",
+        "Not Applicable",
+        "na",
+        "UNKNOWN",
+        "Not provided",
+        "Unknown"
+      ],
+      "StreamingTV": [
+        "Not provided",
+        "NOT APPLICABLE",
+        "Unknown",
+        "na",
+        "Not Applicable",
+        "UNKNOWN"
+      ],
+      "StreamingMovies": [
+        "na",
+        "NOT APPLICABLE",
+        "Not provided",
+        "Unknown",
+        "UNKNOWN",
+        "Not Applicable"
+      ],
+      "Contract": [
+        "Not provided",
+        "UNKNOWN",
+        "na",
+        "Not Applicable",
+        "NOT APPLICABLE",
+        "Unknown"
+      ],
+      "PaperlessBilling": [
+        "Unknown",
+        "na",
+        "Not provided",
+        "NOT APPLICABLE",
+        "Not Applicable",
+        "UNKNOWN"
+      ],
+      "PaymentMethod": [
+        "Not Applicable",
+        "NOT APPLICABLE",
+        "Not provided",
+        "Unknown",
+        "na",
+        "UNKNOWN"
+      ]
+    },
+    "normalize_categorical_variants": {
+      "gender": [
+        "1",
+        "F",
+        "f",
+        "m",
+        "0",
+        "M"
+      ],
+      "SeniorCitizen": [
+        "0",
+        "1"
+      ],
+      "Partner": [
+        "Y",
+        "n",
+        "0",
+        "1",
+        "y",
+        "N"
+      ],
+      "Dependents": [
+        "n",
+        "y",
+        "1",
+        "N",
+        "0",
+        "Y"
+      ],
+      "PhoneService": [
+        "0",
+        "1",
+        "y",
+        "Y",
+        "N",
+        "n"
+      ],
+      "MultipleLines": [
+        "NPS",
+        "y",
+        "1",
+        "0",
+        "n",
+        "no phone service",
+        "Y",
+        "N",
+        "No Phone Service"
+      ],
+      "InternetService": [
+        "Fiber",
+        "0",
+        "N",
+        "fiber",
+        "FO",
+        "n",
+        "Fiber-Optik"
+      ],
+      "OnlineSecurity": [
+        "1",
+        "N",
+        "y",
+        "Y",
+        "n",
+        "No Internet Service",
+        "0",
+        "no internet service",
+        "NIS"
+      ],
+      "OnlineBackup": [
+        "y",
+        "0",
+        "1",
+        "NIS",
+        "Y",
+        "n",
+        "no internet service",
+        "No Internet Service",
+        "N"
+      ],
+      "DeviceProtection": [
+        "n",
+        "Y",
+        "y",
+        "N",
+        "1",
+        "NIS",
+        "0",
+        "No Internet Service",
+        "no internet service"
+      ],
+      "TechSupport": [
+        "0",
+        "1",
+        "NIS",
+        "no internet service",
+        "n",
+        "N",
+        "Y",
+        "y",
+        "No Internet Service"
+      ],
+      "StreamingTV": [
+        "0",
+        "y",
+        "Y",
+        "n",
+        "N",
+        "NIS",
+        "no internet service",
+        "1",
+        "No Internet Service"
+      ],
+      "StreamingMovies": [
+        "Y",
+        "no internet service",
+        "No Internet Service",
+        "y",
+        "0",
+        "N",
+        "NIS",
+        "n",
+        "1"
+      ],
+      "Contract": [
+        "Two Yr",
+        "month to month",
+        "m2m",
+        "2 year",
+        "M2M",
+        "1 year",
+        "Monthly",
+        "2 Yr",
+        "1 Yr",
+        "One Yr"
+      ],
+      "PaperlessBilling": [
+        "Y",
+        "n",
+        "y",
+        "1",
+        "N",
+        "0"
+      ],
+      "PaymentMethod": [
+        "Bank Transfer",
+        "Electronic Payment",
+        "Credit Card",
+        "Mailed Check",
+        "Paper Check",
+        "CC",
+        "Check by Mail",
+        "E Check",
+        "E-check",
+        "Direct Debit"
+      ],
+      "Churn": [
+        "n",
+        "N",
+        "0",
+        "y",
+        "Y",
+        "1"
+      ]
+    },
+    "infinite_to_nan": {
+      "tenure": [
+        "inf"
+      ],
+      "MonthlyCharges": [
+        "inf"
+      ],
+      "TotalCharges": [
+        "inf"
+      ]
+    },
+    "numeric_negative_to_nan": {
+      "tenure": [
+        -1.0,
+        -9999.0,
+        -30.0
+      ],
+      "MonthlyCharges": [
+        -30.0,
+        -9999.0,
+        -1.0
+      ],
+      "TotalCharges": [
+        -30.0,
+        -9999.0,
+        -1.0
+      ]
+    },
+    "numeric_value_corrected": {
+      "tenure": [
+        "-1",
+        "inf",
+        "-9999"
+      ],
+      "MonthlyCharges": [
+        "-30",
+        "-9999",
+        "-1"
+      ],
+      "TotalCharges": [
+        "inf",
+        "-30",
+        "-9999",
+        "-1"
+      ]
+    },
+    "numeric_format_normalized": {
+      "tenure": [
+        "34",
+        "45",
+        "2",
+        "8",
+        "22",
+        "10",
+        "28",
+        "62",
+        "1000000",
+        "16"
+      ],
+      "MonthlyCharges": [
+        "9999",
+        "1000000",
+        "100"
+      ],
+      "TotalCharges": [
+        "9999",
+        "1000000",
+        "100"
+      ]
+    },
+    "fix_logical_inconsistency_internet": {
+      "OnlineSecurity": [
+        "Yes -> No internet service"
+      ],
+      "OnlineBackup": [
+        "Yes -> No internet service"
+      ],
+      "DeviceProtection": [
+        "Yes -> No internet service"
+      ],
+      "TechSupport": [
+        "Yes -> No internet service"
+      ],
+      "StreamingTV": [
+        "Yes -> No internet service"
+      ],
+      "StreamingMovies": [
+        "Yes -> No internet service"
+      ]
+    },
+    "invalid_category_values": {
+      "gender": [
+        "Yes",
+        "No"
+      ]
+    },
+    "impute_numeric_median": {
+      "tenure": [
+        29.0
+      ],
+      "MonthlyCharges": [
+        70.4
+      ],
+      "TotalCharges": [
+        1378.45
+      ]
+    },
+    "impute_categorical_mode": {
+      "gender": [
+        "Male"
+      ],
+      "SeniorCitizen": [
+        "No"
+      ],
+      "Partner": [
+        "No"
+      ],
+      "Dependents": [
+        "No"
+      ],
+      "PhoneService": [
+        "Yes"
+      ],
+      "MultipleLines": [
+        "No"
+      ],
+      "InternetService": [
+        "Fiber optic"
+      ],
+      "OnlineSecurity": [
+        "No"
+      ],
+      "OnlineBackup": [
+        "No"
+      ],
+      "DeviceProtection": [
+        "No"
+      ],
+      "TechSupport": [
+        "No"
+      ],
+      "StreamingTV": [
+        "No"
+      ],
+      "StreamingMovies": [
+        "No"
+      ],
+      "Contract": [
+        "Month-to-month"
+      ],
+      "PaperlessBilling": [
+        "Yes"
+      ],
+      "PaymentMethod": [
+        "Electronic check"
+      ]
+    }
+  },
+  "dropped_rows": 0
+}

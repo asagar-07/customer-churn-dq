@@ -45,7 +45,7 @@ inconsistent_values = {
     'No': ['N', 'n', '0'],
     'No phone service': ['No Phone Service', 'no phone service', 'NPS'],
     'No internet service': ['No Internet Service', 'no internet service', 'NIS'],
-    'Month-to-month': ['Monthly', 'month to month','m2m' ,'M2M','M', 'm'],
+    'Month-to-month': ['Monthly', 'month to month','m2m' ,'M2M'],
     'One year': ['1 year', 'One Yr', '1 Yr'],
     'Two year': ['2 year', 'Two Yr', '2 Yr'],
     'Fiber optic': ['Fiber', 'fiber', 'FO', 'Fiber-Optik'],
