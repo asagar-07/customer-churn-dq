@@ -1,0 +1,1193 @@
+{
+  "meta": {
+    "dataset_name": "before_etl",
+    "timestamp_utc": "2025-12-18T19:55:14.829181Z",
+    "shape": {
+      "rows": 8099,
+      "cols": 21
+    },
+    "id_column": "customerID",
+    "target_column": "Churn",
+    "numeric_columns": [
+      "tenure",
+      "MonthlyCharges",
+      "TotalCharges"
+    ],
+    "categorical_columns": [
+      "gender",
+      "SeniorCitizen",
+      "Partner",
+      "Dependents",
+      "PhoneService",
+      "MultipleLines",
+      "InternetService",
+      "OnlineSecurity",
+      "OnlineBackup",
+      "DeviceProtection",
+      "TechSupport",
+      "StreamingTV",
+      "StreamingMovies",
+      "Contract",
+      "PaperlessBilling",
+      "PaymentMethod"
+    ],
+    "has_duplicate_flags": {
+      "id_count": false,
+      "is_duplicate": false
+    }
+  },
+  "dataset": {
+    "shape": {
+      "rows": 8099,
+      "cols": 21
+    },
+    "columns": null,
+    "columns_by_dtype": {
+      "object": [
+        "gender",
+        "SeniorCitizen",
+        "Partner",
+        "Dependents",
+        "tenure",
+        "PhoneService",
+        "MultipleLines",
+        "InternetService",
+        "OnlineSecurity",
+        "OnlineBackup",
+        "DeviceProtection",
+        "TechSupport",
+        "StreamingTV",
+        "StreamingMovies",
+        "Contract",
+        "PaperlessBilling",
+        "PaymentMethod",
+        "MonthlyCharges",
+        "TotalCharges",
+        "customerID",
+        "Churn"
+      ]
+    }
+  },
+  "missingness": {
+    "total_missing": 3240,
+    "missing_by_column": {
+      "TotalCharges": 573,
+      "tenure": 571,
+      "MonthlyCharges": 553,
+      "OnlineBackup": 113,
+      "SeniorCitizen": 107,
+      "StreamingTV": 106,
+      "PhoneService": 104,
+      "Contract": 103,
+      "PaymentMethod": 103,
+      "PaperlessBilling": 100,
+      "gender": 99,
+      "Partner": 97,
+      "MultipleLines": 96,
+      "InternetService": 95,
+      "Dependents": 93,
+      "OnlineSecurity": 88,
+      "StreamingMovies": 83,
+      "TechSupport": 81,
+      "DeviceProtection": 75,
+      "customerID": 0,
+      "Churn": 0
+    },
+    "missing_pct_by_column": {
+      "TotalCharges": 0.07074947524385726,
+      "tenure": 0.07050253117668848,
+      "MonthlyCharges": 0.0682800345721694,
+      "OnlineBackup": 0.013952339795036425,
+      "SeniorCitizen": 0.013211507593530066,
+      "StreamingTV": 0.013088035559945673,
+      "PhoneService": 0.012841091492776886,
+      "Contract": 0.012717619459192493,
+      "PaymentMethod": 0.012717619459192493,
+      "PaperlessBilling": 0.012347203358439314,
+      "gender": 0.01222373132485492,
+      "Partner": 0.011976787257686134,
+      "MultipleLines": 0.01185331522410174,
+      "InternetService": 0.011729843190517349,
+      "Dependents": 0.011482899123348562,
+      "OnlineSecurity": 0.010865538955426596,
+      "StreamingMovies": 0.01024817878750463,
+      "TechSupport": 0.010001234720335844,
+      "DeviceProtection": 0.009260402518829485,
+      "customerID": 0.0,
+      "Churn": 0.0
+    }
+  },
+  "duplicates": {
+    "duplicate_row_count": 2112,
+    "unique_customer_id_count": 7043,
+    "duplicate_id_count": 1056,
+    "duplicate_flagged_correctly": null,
+    "top_duplicate_ids": {
+      "7590-VHVEG": 2,
+      "2834-SPCJV": 2,
+      "1354-YZFNB": 2,
+      "3804-RVTGV": 2,
+      "7272-QDCKA": 2,
+      "8393-DLHGA": 2,
+      "9184-GALIL": 2,
+      "4393-RYCRE": 2,
+      "3162-ZJZFU": 2,
+      "3721-WKIIL": 2
+    }
+  },
+  "numerical_anomalies": {
+    "columns": [
+      "tenure",
+      "MonthlyCharges",
+      "TotalCharges"
+    ],
+    "per_column": {
+      "tenure": {
+        "nan_count": 645,
+        "inf_count": 24,
+        "negative_count": 55,
+        "min_value": -9999.0,
+        "median_value": 28.0,
+        "max_value": 1000000.0
+      },
+      "MonthlyCharges": {
+        "nan_count": 623,
+        "inf_count": 20,
+        "negative_count": 73,
+        "min_value": -9999.0,
+        "median_value": 70.15,
+        "max_value": 1000000.0
+      },
+      "TotalCharges": {
+        "nan_count": 639,
+        "inf_count": 27,
+        "negative_count": 64,
+        "min_value": -9999.0,
+        "median_value": 1357.1,
+        "max_value": 1000000.0
+      }
+    }
+  },
+  "categorical_anomalies": {
+    "columns": [
+      "gender",
+      "SeniorCitizen",
+      "Partner",
+      "Dependents",
+      "PhoneService",
+      "MultipleLines",
+      "InternetService",
+      "OnlineSecurity",
+      "OnlineBackup",
+      "DeviceProtection",
+      "TechSupport",
+      "StreamingTV",
+      "StreamingMovies",
+      "Contract",
+      "PaperlessBilling",
+      "PaymentMethod"
+    ],
+    "per_column": {
+      "gender": {
+        "nan_count": 99,
+        "unique_count": 20,
+        "top_5_values": {
+          "Male": 3653,
+          "Female": 3558,
+          "f": 56,
+          "0": 56,
+          "1": 56
+        },
+        "whitespace_count": 226,
+        "unknown_values_count": 270,
+        "invalid_category_count": 519,
+        "invalid_examples": [
+          "Male ",
+          "1",
+          "F",
+          "Female ",
+          "f",
+          "m",
+          " Female",
+          "0",
+          " Female ",
+          "M"
+        ]
+      },
+      "SeniorCitizen": {
+        "nan_count": 107,
+        "unique_count": 8,
+        "top_5_values": {
+          "0": 6468,
+          "1": 1262,
+          "Not Applicable": 55,
+          "Not provided": 50,
+          "NOT APPLICABLE": 46
+        },
+        "whitespace_count": 0,
+        "unknown_values_count": 262,
+        "invalid_category_count": 7730,
+        "invalid_examples": [
+          "0",
+          "1"
+        ]
+      },
+      "Partner": {
+        "nan_count": 97,
+        "unique_count": 20,
+        "top_5_values": {
+          "No": 3711,
+          "Yes": 3497,
+          "NOT APPLICABLE": 55,
+          "y": 55,
+          "n": 52
+        },
+        "whitespace_count": 223,
+        "unknown_values_count": 272,
+        "invalid_category_count": 522,
+        "invalid_examples": [
+          "Yes ",
+          "Y",
+          " Yes ",
+          "n",
+          "No ",
+          " Yes",
+          "0",
+          "1",
+          "y",
+          " No "
+        ]
+      },
+      "Dependents": {
+        "nan_count": 93,
+        "unique_count": 20,
+        "top_5_values": {
+          "No": 5055,
+          "Yes": 2152,
+          "N": 69,
+          "0": 68,
+          "n": 63
+        },
+        "whitespace_count": 223,
+        "unknown_values_count": 276,
+        "invalid_category_count": 523,
+        "invalid_examples": [
+          "n",
+          "No ",
+          "Yes ",
+          " Yes ",
+          "y",
+          "1",
+          " No",
+          "N",
+          " No ",
+          " Yes"
+        ]
+      },
+      "PhoneService": {
+        "nan_count": 104,
+        "unique_count": 20,
+        "top_5_values": {
+          "Yes": 6499,
+          "No": 704,
+          "y": 96,
+          "Y": 93,
+          "1": 84
+        },
+        "whitespace_count": 231,
+        "unknown_values_count": 265,
+        "invalid_category_count": 527,
+        "invalid_examples": [
+          "0",
+          " Yes",
+          "1",
+          "y",
+          "Y",
+          "Yes ",
+          " Yes ",
+          "N",
+          "No ",
+          " No "
+        ]
+      },
+      "MultipleLines": {
+        "nan_count": 96,
+        "unique_count": 27,
+        "top_5_values": {
+          "No": 3460,
+          "Yes": 3082,
+          "No phone service": 670,
+          "Unknown": 59,
+          "0": 51
+        },
+        "whitespace_count": 223,
+        "unknown_values_count": 273,
+        "invalid_category_count": 518,
+        "invalid_examples": [
+          "NPS",
+          "No ",
+          "y",
+          "1",
+          " No",
+          " Yes ",
+          "0",
+          " No ",
+          "n",
+          "no phone service"
+        ]
+      },
+      "InternetService": {
+        "nan_count": 95,
+        "unique_count": 25,
+        "top_5_values": {
+          "Fiber optic": 3173,
+          "DSL": 2581,
+          "No": 1560,
+          "na": 57,
+          "Not provided": 48
+        },
+        "whitespace_count": 221,
+        "unknown_values_count": 274,
+        "invalid_category_count": 416,
+        "invalid_examples": [
+          "Fiber",
+          "DSL ",
+          "0",
+          " DSL ",
+          " Fiber optic",
+          " DSL",
+          "No ",
+          " No ",
+          " No",
+          "N"
+        ]
+      },
+      "OnlineSecurity": {
+        "nan_count": 88,
+        "unique_count": 27,
+        "top_5_values": {
+          "No": 3558,
+          "Yes": 2135,
+          "No internet service": 1525,
+          "N": 57,
+          "Not Applicable": 53
+        },
+        "whitespace_count": 215,
+        "unknown_values_count": 281,
+        "invalid_category_count": 512,
+        "invalid_examples": [
+          "1",
+          " No internet service",
+          "N",
+          "y",
+          " Yes",
+          "Yes ",
+          "Y",
+          " No ",
+          "n",
+          " No"
+        ]
+      },
+      "OnlineBackup": {
+        "nan_count": 113,
+        "unique_count": 27,
+        "top_5_values": {
+          "No": 3151,
+          "Yes": 2523,
+          "No internet service": 1542,
+          "Not Applicable": 51,
+          "UNKNOWN": 49
+        },
+        "whitespace_count": 227,
+        "unknown_values_count": 256,
+        "invalid_category_count": 514,
+        "invalid_examples": [
+          "y",
+          "0",
+          "1",
+          " No",
+          "NIS",
+          "Y",
+          " Yes",
+          "No internet service ",
+          " Yes ",
+          "n"
+        ]
+      },
+      "DeviceProtection": {
+        "nan_count": 75,
+        "unique_count": 27,
+        "top_5_values": {
+          "No": 3155,
+          "Yes": 2532,
+          "No internet service": 1520,
+          "NOT APPLICABLE": 64,
+          "Not provided": 54
+        },
+        "whitespace_count": 224,
+        "unknown_values_count": 294,
+        "invalid_category_count": 523,
+        "invalid_examples": [
+          "No ",
+          "n",
+          "No internet service ",
+          " No internet service ",
+          "Yes ",
+          "Y",
+          "y",
+          "N",
+          " No ",
+          "1"
+        ]
+      },
+      "TechSupport": {
+        "nan_count": 81,
+        "unique_count": 27,
+        "top_5_values": {
+          "No": 3559,
+          "Yes": 2141,
+          "No internet service": 1511,
+          "n": 56,
+          "Not provided": 53
+        },
+        "whitespace_count": 230,
+        "unknown_values_count": 288,
+        "invalid_category_count": 519,
+        "invalid_examples": [
+          "No ",
+          " No ",
+          "0",
+          "1",
+          "No internet service ",
+          "NIS",
+          "no internet service",
+          "n",
+          "N",
+          " Yes"
+        ]
+      },
+      "StreamingTV": {
+        "nan_count": 106,
+        "unique_count": 27,
+        "top_5_values": {
+          "No": 2885,
+          "Yes": 2818,
+          "No internet service": 1507,
+          "NOT APPLICABLE": 52,
+          "Not provided": 48
+        },
+        "whitespace_count": 224,
+        "unknown_values_count": 263,
+        "invalid_category_count": 520,
+        "invalid_examples": [
+          " No",
+          "0",
+          "y",
+          "Yes ",
+          " Yes",
+          " No ",
+          "Y",
+          "n",
+          "N",
+          "NIS"
+        ]
+      },
+      "StreamingMovies": {
+        "nan_count": 83,
+        "unique_count": 27,
+        "top_5_values": {
+          "No": 2846,
+          "Yes": 2838,
+          "No internet service": 1524,
+          "NOT APPLICABLE": 59,
+          "Not Applicable": 49
+        },
+        "whitespace_count": 221,
+        "unknown_values_count": 286,
+        "invalid_category_count": 522,
+        "invalid_examples": [
+          " Yes ",
+          "Y",
+          "no internet service",
+          "No ",
+          "No Internet Service",
+          "Yes ",
+          " Yes",
+          "y",
+          "0",
+          "No internet service "
+        ]
+      },
+      "Contract": {
+        "nan_count": 103,
+        "unique_count": 28,
+        "top_5_values": {
+          "Month-to-month": 3986,
+          "Two year": 1740,
+          "One year": 1488,
+          "Not Applicable": 57,
+          "m2m": 51
+        },
+        "whitespace_count": 219,
+        "unknown_values_count": 266,
+        "invalid_category_count": 516,
+        "invalid_examples": [
+          " Month-to-month ",
+          "Two Yr",
+          "Month-to-month ",
+          " Month-to-month",
+          "month to month",
+          "m2m",
+          "2 year",
+          " Two year ",
+          "M2M",
+          "1 year"
+        ]
+      },
+      "PaperlessBilling": {
+        "nan_count": 100,
+        "unique_count": 20,
+        "top_5_values": {
+          "Yes": 4248,
+          "No": 2968,
+          "Y": 61,
+          "1": 61,
+          "y": 60
+        },
+        "whitespace_count": 222,
+        "unknown_values_count": 269,
+        "invalid_category_count": 514,
+        "invalid_examples": [
+          "Yes ",
+          "Y",
+          "n",
+          " No ",
+          " No",
+          "y",
+          "1",
+          "N",
+          "0",
+          " Yes "
+        ]
+      },
+      "PaymentMethod": {
+        "nan_count": 103,
+        "unique_count": 32,
+        "top_5_values": {
+          "Electronic check": 2416,
+          "Mailed check": 1646,
+          "Bank transfer (automatic)": 1580,
+          "Credit card (automatic)": 1566,
+          "UNKNOWN": 48
+        },
+        "whitespace_count": 228,
+        "unknown_values_count": 266,
+        "invalid_category_count": 522,
+        "invalid_examples": [
+          "Bank Transfer",
+          "Electronic Payment",
+          "Credit Card",
+          "Mailed check ",
+          "Credit card (automatic) ",
+          " Electronic check ",
+          "Mailed Check",
+          " Mailed check ",
+          "Paper Check",
+          "CC"
+        ]
+      }
+    },
+    "flags": {
+      "df_categorical_columns_detected": [
+        "gender",
+        "SeniorCitizen",
+        "Partner",
+        "Dependents",
+        "tenure",
+        "PhoneService",
+        "MultipleLines",
+        "InternetService",
+        "OnlineSecurity",
+        "OnlineBackup",
+        "DeviceProtection",
+        "TechSupport",
+        "StreamingTV",
+        "StreamingMovies",
+        "Contract",
+        "PaperlessBilling",
+        "PaymentMethod",
+        "MonthlyCharges",
+        "TotalCharges",
+        "customerID",
+        "Churn"
+      ],
+      "cfg_categorical_columns_expected": [
+        "gender",
+        "SeniorCitizen",
+        "Partner",
+        "Dependents",
+        "PhoneService",
+        "MultipleLines",
+        "InternetService",
+        "OnlineSecurity",
+        "OnlineBackup",
+        "DeviceProtection",
+        "TechSupport",
+        "StreamingTV",
+        "StreamingMovies",
+        "Contract",
+        "PaperlessBilling",
+        "PaymentMethod"
+      ],
+      "extra_categorical_columns_in_df": [
+        "Churn",
+        "MonthlyCharges",
+        "TotalCharges",
+        "customerID",
+        "tenure"
+      ],
+      "missing_categorical_columns_in_df": []
+    }
+  },
+  "logical_rules_anomalies": {
+    "violations_by_rule": {
+      "internet_dependency::OnlineSecurity": 179,
+      "internet_dependency::OnlineBackup": 173,
+      "internet_dependency::DeviceProtection": 184,
+      "internet_dependency::TechSupport": 192,
+      "internet_dependency::StreamingTV": 195,
+      "internet_dependency::StreamingMovies": 186
+    },
+    "examples_by_rule": {
+      "internet_dependency::OnlineSecurity": [
+        {
+          "customerID": "8191-XWSZG",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineSecurity",
+          "actual_value": " No internet service"
+        },
+        {
+          "customerID": "1159-WFSGR",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineSecurity",
+          "actual_value": "NOT APPLICABLE"
+        },
+        {
+          "customerID": "7083-MIOPC",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineSecurity",
+          "actual_value": " No internet service"
+        },
+        {
+          "customerID": "3973-SKMLN",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineSecurity",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "9498-FIMXL",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineSecurity",
+          "actual_value": "No internet service "
+        },
+        {
+          "customerID": "9294-TDIPC",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineSecurity",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "7606-BPHHN",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineSecurity",
+          "actual_value": "na"
+        },
+        {
+          "customerID": "9063-ZGTUY",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineSecurity",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "1135-LMECX",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineSecurity",
+          "actual_value": "UNKNOWN"
+        },
+        {
+          "customerID": "5512-IDZEI",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineSecurity",
+          "actual_value": "No Internet Service"
+        }
+      ],
+      "internet_dependency::OnlineBackup": [
+        {
+          "customerID": "1159-WFSGR",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineBackup",
+          "actual_value": "UNKNOWN"
+        },
+        {
+          "customerID": "0956-SYCWG",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineBackup",
+          "actual_value": "NIS"
+        },
+        {
+          "customerID": "5961-VUSRV",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineBackup",
+          "actual_value": "NOT APPLICABLE"
+        },
+        {
+          "customerID": "3973-SKMLN",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineBackup",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "9294-TDIPC",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineBackup",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "9063-ZGTUY",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineBackup",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "1403-GYAFU",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineBackup",
+          "actual_value": " No internet service "
+        },
+        {
+          "customerID": "5173-ZXXXL",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineBackup",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "5148-HKFIR",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineBackup",
+          "actual_value": "na"
+        },
+        {
+          "customerID": "4160-AMJTL",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "OnlineBackup",
+          "actual_value": "no internet service"
+        }
+      ],
+      "internet_dependency::DeviceProtection": [
+        {
+          "customerID": "9867-JCZSP",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "DeviceProtection",
+          "actual_value": "Not provided"
+        },
+        {
+          "customerID": "0318-ZOPWS",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "DeviceProtection",
+          "actual_value": "No internet service "
+        },
+        {
+          "customerID": "7219-TLZHO",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "DeviceProtection",
+          "actual_value": " No internet service "
+        },
+        {
+          "customerID": "2984-RGEYA",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "DeviceProtection",
+          "actual_value": "na"
+        },
+        {
+          "customerID": "3973-SKMLN",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "DeviceProtection",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "9294-TDIPC",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "DeviceProtection",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "9063-ZGTUY",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "DeviceProtection",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "0732-OCQOC",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "DeviceProtection",
+          "actual_value": "Not provided"
+        },
+        {
+          "customerID": "4785-FCIFB",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "DeviceProtection",
+          "actual_value": "NIS"
+        },
+        {
+          "customerID": "5173-ZXXXL",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "DeviceProtection",
+          "actual_value": "Yes"
+        }
+      ],
+      "internet_dependency::TechSupport": [
+        {
+          "customerID": "7799-LGRDP",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "TechSupport",
+          "actual_value": "na"
+        },
+        {
+          "customerID": "3077-RSNTJ",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "TechSupport",
+          "actual_value": "na"
+        },
+        {
+          "customerID": "2907-ILJBN",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "TechSupport",
+          "actual_value": "No internet service "
+        },
+        {
+          "customerID": "0956-SYCWG",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "TechSupport",
+          "actual_value": "NIS"
+        },
+        {
+          "customerID": "4709-LKHYG",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "TechSupport",
+          "actual_value": "no internet service"
+        },
+        {
+          "customerID": "3973-SKMLN",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "TechSupport",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "9294-TDIPC",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "TechSupport",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "9063-ZGTUY",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "TechSupport",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "5173-ZXXXL",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "TechSupport",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "8755-OGKNA",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "TechSupport",
+          "actual_value": " No internet service"
+        }
+      ],
+      "internet_dependency::StreamingTV": [
+        {
+          "customerID": "1984-GPTEH",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingTV",
+          "actual_value": "na"
+        },
+        {
+          "customerID": "6292-TOSSS",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingTV",
+          "actual_value": "NIS"
+        },
+        {
+          "customerID": "3973-SKMLN",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingTV",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "9639-BUJXT",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingTV",
+          "actual_value": " No internet service"
+        },
+        {
+          "customerID": "9294-TDIPC",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingTV",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "7606-BPHHN",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingTV",
+          "actual_value": "no internet service"
+        },
+        {
+          "customerID": "9063-ZGTUY",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingTV",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "2640-LYMOV",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingTV",
+          "actual_value": "No Internet Service"
+        },
+        {
+          "customerID": "5173-ZXXXL",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingTV",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "0422-OHQHQ",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingTV",
+          "actual_value": "na"
+        }
+      ],
+      "internet_dependency::StreamingMovies": [
+        {
+          "customerID": "3930-ZGWVE",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingMovies",
+          "actual_value": "no internet service"
+        },
+        {
+          "customerID": "6837-BJYDQ",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingMovies",
+          "actual_value": "NOT APPLICABLE"
+        },
+        {
+          "customerID": "6469-MRVET",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingMovies",
+          "actual_value": "Unknown"
+        },
+        {
+          "customerID": "3973-SKMLN",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingMovies",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "9294-TDIPC",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingMovies",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "6563-VRERX",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingMovies",
+          "actual_value": "no internet service"
+        },
+        {
+          "customerID": "9442-JTWDL",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingMovies",
+          "actual_value": "Not Applicable"
+        },
+        {
+          "customerID": "9063-ZGTUY",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingMovies",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "1135-LMECX",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingMovies",
+          "actual_value": "No Internet Service"
+        },
+        {
+          "customerID": "2654-VBVPB",
+          "parent_column": "InternetService",
+          "parent_value": "No",
+          "dependent_column": "StreamingMovies",
+          "actual_value": "No Internet Service"
+        }
+      ],
+      "phone_dependency::MultipleLines": [
+        {
+          "customerID": "7795-CFOCW",
+          "parent_column": "PhoneService",
+          "parent_value": "No",
+          "dependent_column": "MultipleLines",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "6713-OKOMC",
+          "parent_column": "PhoneService",
+          "parent_value": "No",
+          "dependent_column": "MultipleLines",
+          "actual_value": "NPS"
+        },
+        {
+          "customerID": "8665-UTDHZ",
+          "parent_column": "PhoneService",
+          "parent_value": "No",
+          "dependent_column": "MultipleLines",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "0699-NDKJM",
+          "parent_column": "PhoneService",
+          "parent_value": "No",
+          "dependent_column": "MultipleLines",
+          "actual_value": "no phone service"
+        },
+        {
+          "customerID": "6543-CPZMK",
+          "parent_column": "PhoneService",
+          "parent_value": "No",
+          "dependent_column": "MultipleLines",
+          "actual_value": "No phone service "
+        },
+        {
+          "customerID": "6464-KEXXH",
+          "parent_column": "PhoneService",
+          "parent_value": "No",
+          "dependent_column": "MultipleLines",
+          "actual_value": "Yes"
+        },
+        {
+          "customerID": "0823-HSCDJ",
+          "parent_column": "PhoneService",
+          "parent_value": "No",
+          "dependent_column": "MultipleLines",
+          "actual_value": "Unknown"
+        },
+        {
+          "customerID": "9227-LUNBG",
+          "parent_column": "PhoneService",
+          "parent_value": "No",
+          "dependent_column": "MultipleLines",
+          "actual_value": " No phone service "
+        },
+        {
+          "customerID": "3845-JHAMY",
+          "parent_column": "PhoneService",
+          "parent_value": "No",
+          "dependent_column": "MultipleLines",
+          "actual_value": " No phone service"
+        },
+        {
+          "customerID": "8898-KASCD",
+          "parent_column": "PhoneService",
+          "parent_value": "No",
+          "dependent_column": "MultipleLines",
+          "actual_value": "Yes"
+        }
+      ]
+    }
+  },
+  "label_distribution": {
+    "target_column": "Churn",
+    "present": true,
+    "nan_count": 0,
+    "counts": {
+      "No": 5601,
+      "Yes": 2147,
+      "N": 82,
+      "0": 80,
+      "n": 75,
+      "y": 43,
+      "1": 36,
+      "Y": 35
+    },
+    "pct": {
+      "No": 0.691566860106186,
+      "Yes": 0.26509445610569204,
+      "N": 0.010124706753920238,
+      "0": 0.00987776268675145,
+      "n": 0.009260402518829485,
+      "y": 0.005309297444128905,
+      "1": 0.004444993209038153,
+      "Y": 0.00432152117545376
+    }
+  }
+}

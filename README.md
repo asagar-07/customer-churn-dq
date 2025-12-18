@@ -52,3 +52,21 @@ v0.3 - ETL Cleaning Pipeline with Audit Logging and a reproducible runner script
     Output Artifacts (v0.3)
 	•	data/processed/customers_clean_for_model.csv (Clean, ML-ready dataset)
 	•	reports/etl_log.json (Detailed ETL audit and data quality log)
+
+v0.4 - DQ reporting workflow to compare before and after ETL.
+    •   Updated ETL pipline by introducing additional modules.
+    •   a - Enforce logical dependencies betwen parent and dependent features
+    •   b - enforced domain specific numeric ranges
+    
+    DQ checks (dq_checks.py) 
+	•	Generates JSON-serializable reports for:
+	•	dataset meta + schema overview
+	•	missingness totals + per-column
+	•	duplicates metrics (counts + top duplicate IDs + flag validation)
+	•	numeric anomalies (NaN/inf/negative + min/median/max)
+	•	categorical anomalies (NaN, unique count, top values, whitespace count, unknown token count, invalid category count + examples)
+	•	logical rule violations (dependency enforcement checks)
+	•	label distribution (Churn) counts + percentages + missing
+	•	Output Artifacts (v0.4)
+	•	reports/dq_before.json (messy input)
+	•	reports/dq_after.json (cleaned output)

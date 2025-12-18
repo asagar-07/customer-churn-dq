@@ -81,13 +81,28 @@
       "MonthlyCharges": 93,
       "TotalCharges": 91
     },
-    "fix_logical_inconsistency_internet": {
-      "OnlineSecurity": 58,
-      "OnlineBackup": 56,
-      "DeviceProtection": 59,
-      "TechSupport": 54,
-      "StreamingTV": 61,
-      "StreamingMovies": 56
+    "cap_tenure_max": {
+      "tenure": 77
+    },
+    "cap_monthlycharges_max": {
+      "MonthlyCharges": 42
+    },
+    "repair_totalcharges_tenure_x_monthly": {
+      "TotalCharges": 680
+    },
+    "cap_totalcharges_max_no_inputs": {
+      "TotalCharges": 4
+    },
+    "force_internet_dependents_when_no": {
+      "OnlineSecurity": 128,
+      "OnlineBackup": 132,
+      "DeviceProtection": 139,
+      "TechSupport": 138,
+      "StreamingTV": 136,
+      "StreamingMovies": 133
+    },
+    "force_phone_dependents_when_no": {
+      "MultipleLines": 57
     },
     "invalid_category_values": {
       "gender": 112
@@ -98,7 +113,7 @@
     "impute_numeric_median": {
       "tenure": 724,
       "MonthlyCharges": 716,
-      "TotalCharges": 730
+      "TotalCharges": 160
     },
     "impute_categorical_mode": {
       "gender": 481,
@@ -106,14 +121,14 @@
       "Partner": 369,
       "Dependents": 369,
       "PhoneService": 369,
-      "MultipleLines": 369,
+      "MultipleLines": 337,
       "InternetService": 369,
-      "OnlineSecurity": 369,
-      "OnlineBackup": 369,
-      "DeviceProtection": 369,
-      "TechSupport": 369,
-      "StreamingTV": 369,
-      "StreamingMovies": 369,
+      "OnlineSecurity": 299,
+      "OnlineBackup": 293,
+      "DeviceProtection": 289,
+      "TechSupport": 285,
+      "StreamingTV": 294,
+      "StreamingMovies": 292,
       "Contract": 369,
       "PaperlessBilling": 369,
       "PaymentMethod": 369
@@ -484,24 +499,62 @@
         "100"
       ]
     },
-    "fix_logical_inconsistency_internet": {
+    "cap_tenure_max": {
+      "tenure": [
+        1000000.0,
+        100.0,
+        9999.0
+      ]
+    },
+    "cap_monthlycharges_max": {
+      "MonthlyCharges": [
+        9999.0,
+        1000000.0
+      ]
+    },
+    "repair_totalcharges_tenure_x_monthly": {
+      "TotalCharges": [
+        587.45,
+        null,
+        662.65,
+        6519.75
+      ]
+    },
+    "cap_totalcharges_max_no_inputs": {
+      "TotalCharges": [
+        1000000.0
+      ]
+    },
+    "force_internet_dependents_when_no": {
       "OnlineSecurity": [
-        "Yes -> No internet service"
+        "<NA>",
+        "Yes"
       ],
       "OnlineBackup": [
-        "Yes -> No internet service"
+        "<NA>",
+        "Yes"
       ],
       "DeviceProtection": [
-        "Yes -> No internet service"
+        "<NA>",
+        "Yes"
       ],
       "TechSupport": [
-        "Yes -> No internet service"
+        "<NA>",
+        "Yes"
       ],
       "StreamingTV": [
-        "Yes -> No internet service"
+        "<NA>",
+        "Yes"
       ],
       "StreamingMovies": [
-        "Yes -> No internet service"
+        "<NA>",
+        "Yes"
+      ]
+    },
+    "force_phone_dependents_when_no": {
+      "MultipleLines": [
+        "Yes",
+        "<NA>"
       ]
     },
     "invalid_category_values": {
@@ -518,7 +571,7 @@
         70.4
       ],
       "TotalCharges": [
-        1378.45
+        1389.85
       ]
     },
     "impute_categorical_mode": {

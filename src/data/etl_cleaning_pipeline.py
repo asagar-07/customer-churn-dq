@@ -56,9 +56,9 @@ class ETLConfig:
     internet_parent: str = "InternetService"
     internet_dependents: Tuple[str, ...] = (
         "OnlineSecurity", "OnlineBackup", "DeviceProtection", "TechSupport",
-        "StreamingTV", "StreamingMovies")
+        "StreamingTV", "StreamingMovies",)
     phone_parent: str = "PhoneService"
-    phone_dependents: Tuple[str, ...] = ("MultipleLines")
+    phone_dependents: Tuple[str, ...] = ("MultipleLines",)
 
     #valid value sets used in DQ checks
     valid_values: Dict[str, List[str]] = field(default_factory=lambda: {
@@ -111,8 +111,13 @@ def _bump(log: Dict[str, Any], step: str, column: str, count: int, examples: Opt
         for example in examples:
             if len(log['examples'][step][column]) >= 10:
                 break
-            if example not in log['examples'][step][column]:
-                log['examples'][step][column].append(example)
+            if pd.isna(example):
+                safe_example = None
+            else:
+                safe_example = example if isinstance(example,(str, int, float, bool)) else str(example) 
+            
+            if safe_example not in log['examples'][step][column]:
+                log['examples'][step][column].append(safe_example)
 
 
 # ------------------------------------
@@ -220,9 +225,6 @@ def coerce_numeric(df: pd.DataFrame, cfg: ETLConfig, log: Dict[str, Any]) -> pd.
         a = before_num.to_numpy()
         b = coerced.to_numpy()
 
-        # both NaN -> equal
-        both_nan = np.isnan(a) & np.isnan(b)
-
         # one NaN and the other not -> changed
         one_nan = np.isnan(a) ^ np.isnan(b)
 
@@ -264,50 +266,142 @@ def coerce_numeric(df: pd.DataFrame, cfg: ETLConfig, log: Dict[str, Any]) -> pd.
 
     return out
 
+#enforce numeric ranges
+def enforce_numeric_ranges(df: pd.DataFrame, cfg: ETLConfig, log: Dict[str, Any]) -> pd.DataFrame:
+    """
+    Domain-specific numeric enforcement (repair to most plausible value) for Telco churn dataset:
+    1) tenure: cap anything > 72 to 72
+    2) MonthlyCharges: cap anything > 200 to 200
+    3) TotalCharges: repair ONLY when one of these is true:
+       - TotalCharges is NaN
+       - TotalCharges > 20000
+       - tenure was capped OR MonthlyCharges was capped
+       Repair rule: TotalCharges = tenure * MonthlyCharges
+
+    Notes:
+    - Assumes coerce_numeric() already handled type coercion and +/-inf -> NaN.
+    - Does not mutate input df; returns a modified copy.
+    """
+    out = df.copy()
+
+    # Require these columns to do the full repair
+    required = set(cfg.numeric_columns)
+    if not required.issubset(out.columns):
+        return out
+
+    # Numeric views (safe even if already numeric)
+    tenure = pd.to_numeric(out["tenure"], errors="coerce")
+    monthly = pd.to_numeric(out["MonthlyCharges"], errors="coerce")
+    total = pd.to_numeric(out["TotalCharges"], errors="coerce")
+
+    # ----------------------------
+    # 1) Cap tenure at 72
+    # ----------------------------
+    tenure_cap_mask = tenure.notna() & (tenure > 72)
+    if tenure_cap_mask.any():
+        examples = tenure[tenure_cap_mask].head(10).tolist()
+        tenure = tenure.mask(tenure_cap_mask, 72.0)
+        out["tenure"] = tenure
+        _bump(log, "cap_tenure_max", "tenure", int(tenure_cap_mask.sum()), examples)
+
+    # ----------------------------
+    # 2) Cap MonthlyCharges at 200
+    # ----------------------------
+    monthly_cap_mask = monthly.notna() & (monthly > 200)
+    if monthly_cap_mask.any():
+        examples = monthly[monthly_cap_mask].head(10).tolist()
+        monthly = monthly.mask(monthly_cap_mask, 200.0)
+        out["MonthlyCharges"] = monthly
+        _bump(log, "cap_monthlycharges_max", "MonthlyCharges", int(monthly_cap_mask.sum()), examples)
+
+    # Refresh views after caps (important for TotalCharges recompute)
+    tenure = pd.to_numeric(out["tenure"], errors="coerce")
+    monthly = pd.to_numeric(out["MonthlyCharges"], errors="coerce")
+    total = pd.to_numeric(out["TotalCharges"], errors="coerce")
+
+    # ----------------------------
+    # 3) Repair TotalCharges when:
+    #    - NaN
+    #    - > 20000
+    #    - tenure/monthly was capped
+    # ----------------------------
+    expected_total = tenure * monthly
+
+    total_nan_mask = total.isna()
+    total_too_high_mask = total.notna() & (total > 20000)
+
+    capped_any_mask = tenure_cap_mask.fillna(False) | monthly_cap_mask.fillna(False)
+
+    # Only repair when we have enough inputs to compute a plausible total
+    have_inputs_mask = tenure.notna() & monthly.notna() & expected_total.notna()
+
+    # A) repair where inputs exist
+    repair_with_inputs_mask = have_inputs_mask & (total_nan_mask | total_too_high_mask | capped_any_mask)
+    if repair_with_inputs_mask.any():
+        examples = total[repair_with_inputs_mask].head(10).tolist()
+        out.loc[repair_with_inputs_mask, "TotalCharges"] = expected_total.loc[repair_with_inputs_mask]
+        _bump(log, "repair_totalcharges_tenure_x_monthly", "TotalCharges", int(repair_with_inputs_mask.sum()), examples)
+
+    # B) fallback: totals too high but inputs missing -> cap total to 20000
+    repair_no_inputs_mask = total_too_high_mask & (~have_inputs_mask)
+    if repair_no_inputs_mask.any():
+        examples = total[repair_no_inputs_mask].head(10).tolist()
+        out.loc[repair_no_inputs_mask, "TotalCharges"] = 20000.0
+        _bump(log, "cap_totalcharges_max_no_inputs", "TotalCharges", int(repair_no_inputs_mask.sum()), examples)
+
+    return out
+
 def fix_logical_inconsistencies(df: pd.DataFrame, cfg: ETLConfig, log: Dict[str, Any]) -> pd.DataFrame:
     """
     - If InternetService == 'No' => dependents must be 'No internet service'
-    - If PhoneService == 'No' => MultipleLines must be 'No phone service'
+    - If PhoneService == 'No' => dependents must be 'No phone service'
     """
     out = df.copy()
+
+    def _norm(s: pd.Series) -> pd.Series:
+        # normalize for comparison only (do not write back, no mutation)
+        return s.astype("string").str.strip()
 
     # InternetService dependencies
     if cfg.internet_parent in out.columns:
         parent = cfg.internet_parent
-        for dep in cfg.internet_dependents:
-            if dep not in out.columns:
-                continue
-            mask = (out[parent] == "No") & (out[dep] == "Yes")
-            if mask.any():
-                out.loc[mask, dep] = "No internet service"
-                _bump(log, "fix_logical_inconsistency_internet", dep, int(mask.sum()), examples=["Yes -> No internet service"])
+        parent_norm = _norm(out[parent])
+        parent_is_no = parent_norm.eq("No")
 
-            # Also if parent == No, any non-null not-equal "No internet service" should be set to "No internet service"
-            mask2 = (out[parent] == "No") & out[dep].notna() & (out[dep] != "No internet service")
-            # Avoid double counting from mask above
-            mask2 = mask2 & ~mask
-            if mask2.any():
-                before_vals = out.loc[mask2, dep].astype("string").unique().tolist()[:10]
-                out.loc[mask2, dep] = "No internet service"
-                _bump(log, "force_internet_dependents_when_no", dep, int(mask2.sum()), before_vals)
+        if parent_is_no.any():
+            for dep in cfg.internet_dependents:
+                if dep not in out.columns:
+                    continue
+
+                dep_norm = _norm(out[dep])
+                # Force when parent is No and dependent is not already the expected value
+                mask_force = parent_is_no & (~dep_norm.eq("No internet service").fillna(False))
+
+                if mask_force.any():
+                    before_vals = out.loc[mask_force, dep].astype("string").unique().tolist()[:10]
+                    before_vals = [None if x is np.nan else str(x) for x in before_vals]
+                    out.loc[mask_force, dep] = "No internet service"
+                    _bump(log, "force_internet_dependents_when_no", dep, int(mask_force.sum()), before_vals)
 
     # PhoneService dependencies
     if cfg.phone_parent in out.columns:
         parent = cfg.phone_parent
-        for dep in cfg.phone_dependents:
-            if dep not in out.columns:
-                continue
-            mask = (out[parent] == "No") & (out[dep] == "Yes")
-            if mask.any():
-                out.loc[mask, dep] = "No phone service"
-                _bump(log, "fix_logical_inconsistency_phone", dep, int(mask.sum()), examples=["Yes -> No phone service"])
+        parent_norm = _norm(out[parent])
+        parent_is_no = parent_norm.eq("No")
 
-            mask2 = (out[parent] == "No") & out[dep].notna() & (out[dep] != "No phone service")
-            mask2 = mask2 & ~mask
-            if mask2.any():
-                before_vals = out.loc[mask2, dep].astype("string").unique().tolist()[:10]
-                out.loc[mask2, dep] = "No phone service"
-                _bump(log, "force_phone_dependents_when_no", dep, int(mask2.sum()), before_vals)
+        if parent_is_no.any():
+            for dep in cfg.phone_dependents:
+                if dep not in out.columns:
+                    continue
+
+                dep_norm = _norm(out[dep])
+                mask_force = parent_is_no & (~dep_norm.eq("No phone service").fillna(False))
+
+                if mask_force.any():
+                    before_vals = out.loc[mask_force, dep].astype("string").unique().tolist()[:10]
+                    before_vals = [None if x is np.nan else str(x) for x in before_vals]
+                    out.loc[mask_force, dep] = "No phone service"
+                    _bump(log, "force_phone_dependents_when_no", dep, int(mask_force.sum()), before_vals)
 
     return out
 
@@ -408,6 +502,7 @@ def run_etl(df: pd.DataFrame, cfg: Optional[ETLConfig]= None, *, drop_invalid_ro
     df_etl = normalize_unknown_tokens(df_etl, cfg, log)
     df_etl = normalize_categorical_variants(df_etl, cfg, log)
     df_etl = coerce_numeric(df_etl, cfg, log)
+    df_etl = enforce_numeric_ranges(df_etl, cfg, log)
     df_etl = fix_logical_inconsistencies(df_etl, cfg, log)
     df_etl = enforce_valid_values(df_etl, cfg, log, drop_invalid_rows=drop_invalid_rows)
     df_etl = flag_duplicates(df_etl, cfg, log)
