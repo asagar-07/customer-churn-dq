@@ -70,3 +70,60 @@ v0.4 - DQ reporting workflow to compare before and after ETL.
 	•	Output Artifacts (v0.4)
 	•	reports/dq_before.json (messy input)
 	•	reports/dq_after.json (cleaned output)
+
+v0.5 - Baseline Model & Business Thresholding & Artifacts
+
+Problem - Predict customer churn using historical Telco customer data and convert predictions into actionable retention signals.
+
+Data Preparation & Feature Engineering
+	•	Performed EDA on raw and cleaned data to understand churn drivers and data quality issues.
+	•	Derived additional features (e.g., bundled services count).
+	•	Identified:
+	•	Target: Churn
+	•	Numeric features: tenure, monthly charges, total charges (scaled using MinMaxScaler)
+	•	Categorical features: contract type, internet services, billing methods, etc. (one-hot encoded)
+	•	Ensured consistent preprocessing across train, validation, and test splits.
+
+
+Model
+	•	Algorithm: Logistic Regression (baseline, interpretable)
+	•	Why: Provides stable probabilistic outputs and clear feature influence for business interpretation.
+	•	Evaluation metric focus: ROC-AUC, Recall, Precision, F1 (accuracy not sufficient due to class imbalance).
+
+Key Results (Test Set)
+	•	ROC-AUC: ~0.79
+	•	Accuracy: ~0.77
+	•	Recall (Churn = Yes): ~0.47 at default threshold (0.5)
+
+Top churn drivers (by model weights):
+	•	Month-to-month contracts
+	•	Lack of tech support / online backup
+	•	Fiber optic internet
+	•	High monthly charges
+	•	Electronic check payment method
+
+
+Threshold Analysis & Business Framing
+	•	Evaluated thresholds from 0.50 → 0.25 on the validation set.
+	•	Observed strong precision–recall tradeoff:
+	•	Higher thresholds miss many churners.
+	•	Lower thresholds increase recall but expand campaign size.
+
+Selected threshold: 0.40
+
+At threshold 0.40:
+	•	Recall (Yes): ~61%
+	•	Precision (Yes): ~61%
+	•	Balanced F1 score
+	•	Operationally manageable number of customers flagged for retention
+
+Business rationale:
+Missing a true churner is costlier than contacting a loyal customer; therefore, recall is prioritized while maintaining reasonable precision.
+
+Artifacts:
+- churn_lr_model.pkl
+- scaler.pkl
+- encoder.pkl
+- feature_columns.json
+- model_metadata.json
+

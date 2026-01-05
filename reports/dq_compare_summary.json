@@ -1,0 +1,13 @@
+{
+  "rows_before": 8099,
+  "rows_after": 8099,
+  "total_missing_before": 3240,
+  "total_missing_after": 0,
+  "logical_violations_before": 1109,
+  "logical_violations_after": 0,
+  "numeric_max_after": {
+    "tenure": 72.0,
+    "MonthlyCharges": 200.0,
+    "TotalCharges": 20000.0
+  }
+}

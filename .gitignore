@@ -43,13 +43,6 @@ data/raw/*
 # Ignore large sample messy data (optional)
 data/sample/*
 
-##############################################
-# Model Artifacts
-##############################################
-models/
-*.pkl
-*.joblib
-*.h5
 
 ##############################################
 # Logs and temp

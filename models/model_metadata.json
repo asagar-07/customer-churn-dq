@@ -1,0 +1,15 @@
+{
+  "model_type": "LogisticRegression",
+  "positive_class": "Yes",
+  "chosen_threshold": 0.4,
+  "roc_auc_test": 0.7908,
+  "test_metrics_at_threshold": {
+    "accuracy": 0.7561728395061729,
+    "precision_yes": 0.5627615062761506,
+    "recall_yes": 0.5912087912087912,
+    "f1_yes": 0.5766345123258306
+  },
+  "train_size": 4859,
+  "val_size": 1620,
+  "test_size": 1620
+}
