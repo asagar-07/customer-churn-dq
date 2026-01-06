@@ -1,4 +1,12 @@
+CUSTOMER-CHURN
+
 This project simulates a real-world machine learning workflow where raw customer data is often incomplete, inconsistent, messy, or incorrect.
+
+[![CI](https://github.com/asagar-07/customer-churn-dq/actions/workflows/ci.yml/badge.svg)](
+https://github.com/asagar-07/customer-churn-dq/actions/workflows/ci.yml
+)
+
+
 
 Key goals:
 	•	Build a dirty data generation engine that systematically injects realistic corruption
@@ -168,3 +176,88 @@ Final Model Selected: E1 ( TenureBin only)
 
 
 v0.7 - Persistent Artifacts and Smoke Test (minimal CI)
+     - another commit to fix CI.yml
+
+
+## What This Project Demonstrates
+
+This project demonstrates an end-to-end **Data Quality + Machine Learning pipeline**
+built with production-oriented practices.
+
+Key capabilities:
+
+- **Data Quality Engineering**
+  - Dataset shape, missingness, duplicates, numeric & categorical anomalies
+  - Logical dependency checks (InternetService / PhoneService relationships)
+  - Before vs After ETL DQ reporting
+
+- **Robust ETL Pipeline**
+  - Whitespace trimming, normalization, type coercion
+  - Domain-specific numeric repairs (tenure, charges)
+  - Logical consistency enforcement
+  - Detailed ETL logging with examples
+
+- **Feature Engineering Experiments**
+  - Baseline vs engineered features
+  - Tenure bins and derived financial ratios
+  - Controlled experiment comparison (E0–E3)
+
+- **Modeling & Evaluation**
+  - Logistic Regression baseline
+  - Train / validation / test splits
+  - ROC-AUC, Precision, Recall, F1 analysis
+  - Business-driven threshold tuning
+
+- **Model Artifact Management**
+  - Persisted model, scaler, encoder, feature schema
+  - Versioned artifacts with metadata and model card
+
+- **Production Readiness**
+  - Reproducible pipeline execution
+  - Smoke tests
+  - GitHub Actions CI for automated validation
+
+
+  ## Artifacts & Reports
+
+### Model Artifacts
+Persisted model and preprocessing artifacts (v0.6 best experiment):
+
+models/
+└── v0_6_best/
+├── lr_v0_6_best.joblib
+├── preprocess_v0_6_best.joblib
+└── model_card_v0_6_best.json
+
+These artifacts include:
+- Trained Logistic Regression model
+- Fitted scaler and encoder
+- Feature ordering and threshold
+- Model metadata and evaluation summary
+
+---
+
+### Data Quality Reports
+Generated during ETL execution:
+
+reports/
+├── dq_before.json
+├── dq_after.json
+└── etl_log.json
+
+These reports capture:
+- Dataset health before and after cleaning
+- Column-level anomaly counts
+- Logical rule violations
+- Exact transformations applied during ETL
+
+## Continuous Integration
+This repository uses **GitHub Actions** to validate every push and pull request.
+
+CI checks include:
+- ETL runner smoke test
+- Unit test execution
+- Dependency installation validation
+
+Workflow definition: 
+.github/workflows/ci.yml
