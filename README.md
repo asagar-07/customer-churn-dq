@@ -84,7 +84,6 @@ Data Preparation & Feature Engineering
 	•	Categorical features: contract type, internet services, billing methods, etc. (one-hot encoded)
 	•	Ensured consistent preprocessing across train, validation, and test splits.
 
-
 Model
 	•	Algorithm: Logistic Regression (baseline, interpretable)
 	•	Why: Provides stable probabilistic outputs and clear feature influence for business interpretation.
@@ -127,3 +126,42 @@ Artifacts:
 - feature_columns.json
 - model_metadata.json
 
+
+v0.6 - Feature Engineering Comparison and Model Selection
+
+This release extends the baseline churn model with feature engineering experiements, compares their impact systematically and finalizes a business-ready model configuration using vlaidation-driven threshold analysis.
+
+Four controlled experiments were evaluated using same preprocessing, model type and decision thrshold.
+
+Experiment 	Desctiption
+E0		   	Baseline 
+E1			+ TenureBin (categorical buckets of tenure)
+E2			+ AvgMonthlyFromTotal (TotalCharges/tenure)
+E3			+ E1 + E2
+
+- All transformations were fit on training data only.
+- Applied consistently to validation and test sets
+- Evaluated using identical metrics
+
+	•	Model: Logistic Regression
+	•	Threshold: 0.40 (chosen via validation threshold sweep)
+	•	Primary metrics: ROC-AUC, Precision, Recall, F1 (Churn = “Yes”)
+
+Validation Performance (threshold = 0.40)
+
+Experiment	ROC-AUC	F1(Yes)	Flagged	Customers
+E0 			0.813 	0.607 	463
+E1 			0.816 	0.611 	444
+E2 			0.814 	0.607 	463
+E3 			0.817 	0.610 	445
+
+Performance remained stable across experiments, with no overfitting signal.
+
+Final Model Selected: E1 ( TenureBin only)
+	•	Best validation F1 score
+	•	Comparable ROC-AUC to more complex variants
+	•	Clear business interpretability
+	•	Minimal feature complexity
+	•	Stable customer-flagging volume
+
+"At 0.40 threshold, the model identifies ~60% of churners while flagging ~440 customers for retention outreach — a reasonable trade-off between recall and operational cost."
