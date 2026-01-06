@@ -165,3 +165,6 @@ Final Model Selected: E1 ( TenureBin only)
 	•	Stable customer-flagging volume
 
 "At 0.40 threshold, the model identifies ~60% of churners while flagging ~440 customers for retention outreach — a reasonable trade-off between recall and operational cost."
+
+
+v0.7 - Persistent Artifacts and Smoke Test (minimal CI)
